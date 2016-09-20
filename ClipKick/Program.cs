@@ -8,8 +8,7 @@ namespace ClipKick
     {
         static string target = string.Empty;
 
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             // クリップボードチェック
             var t = new System.Threading.Thread(ClipKick.GetClipboardText);
             t.SetApartmentState(System.Threading.ApartmentState.STA);
@@ -60,28 +59,28 @@ namespace ClipKick
             // 指定プログラムをスタートする
             var p = new System.Diagnostics.Process();
             p.StartInfo.FileName = strProgram;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.UseShellExecute = false;
             if (bForceDir) {
                 p.StartInfo.Arguments = string.Format("\"{0}\"", directory);
-            } else {
+            }
+            else {
                 p.StartInfo.Arguments = string.Format("\"{0}\"", arguments.ToString());
             }
             p.Start();
         }
 
-        static void GetClipboardText()
-        {
+        static void GetClipboardText() {
             if (Clipboard.ContainsText()) {
                 target = Clipboard.GetText();
             }
         }
 
-        static bool CheckFile(string path)
-        {
+        static bool CheckFile(string path) {
             return System.IO.File.Exists(path);
         }
 
-        static bool CheckAndModifyDirectory(ref string path)
-        {
+        static bool CheckAndModifyDirectory(ref string path) {
             if (System.IO.Directory.Exists(path)) {
                 if (path.EndsWith("\\") == false) {
                     path += "\\";
