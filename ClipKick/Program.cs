@@ -29,7 +29,7 @@ namespace ClipKick
             var strProgram = cmds[1];
             if (ClipKick.CheckFile(strProgram)) {
                 var ext = Path.GetExtension(strProgram).ToLower();
-                if (ext.Equals("exe") == false && ext.Equals("bat") == false) {
+                if (ext.Equals(".exe") == false && ext.Equals(".bat") == false) {
                     return;
                 }
             } else {
