@@ -34,7 +34,6 @@ namespace ClipKick
                 }
             } else {
                 return;
-
             }
 
             // 引数の強制ディクレクトリ指定フラグ
