@@ -1,0 +1,5 @@
+D:\Work\GitHub\ClipKick\ClipKick\bin\Release\ClipKick.exe.config
+D:\Work\GitHub\ClipKick\ClipKick\bin\Release\ClipKick.exe
+D:\Work\GitHub\ClipKick\ClipKick\bin\Release\ClipKick.pdb
+D:\Work\GitHub\ClipKick\ClipKick\obj\Release\ClipKick.exe
+D:\Work\GitHub\ClipKick\ClipKick\obj\Release\ClipKick.pdb
