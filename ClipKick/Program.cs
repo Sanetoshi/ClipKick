@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-// using System.Windows.Forms;
+#if WINDOWS
+using System.Windows.Forms;
+#endif
 
 namespace ClipKick
 {
@@ -19,20 +21,22 @@ namespace ClipKick
                 }
             }
 
+#if WINDOWS
             // クリップボードチェック
-            // var t = new System.Threading.Thread(ClipKick.GetClipboardText);
-            // t.SetApartmentState(System.Threading.ApartmentState.STA);
-            // t.Start();
-            // t.Join();
+             var t = new System.Threading.Thread(ClipKick.GetClipboardText);
+             t.SetApartmentState(System.Threading.ApartmentState.STA);
+             t.Start();
+             t.Join();
+#endif
             if (bIsOSX) {
-                var pClip = new System.Diagnostics.Process();
-                pClip.StartInfo.FileName = "pbpaste";
-                pClip.StartInfo.CreateNoWindow = true;
-                pClip.StartInfo.UseShellExecute = false;
-                pClip.StartInfo.RedirectStandardOutput = true;
-                pClip.StartInfo.RedirectStandardInput = false;
-                pClip.Start();
-                target = pClip.StandardOutput.ReadToEnd();
+                var procClip = new System.Diagnostics.Process();
+                procClip.StartInfo.FileName = "pbpaste";
+                procClip.StartInfo.CreateNoWindow = true;
+                procClip.StartInfo.UseShellExecute = false;
+                procClip.StartInfo.RedirectStandardOutput = true;
+                procClip.StartInfo.RedirectStandardInput = false;
+                procClip.Start();
+                target = procClip.StandardOutput.ReadToEnd();
             }
 
             // コマンドライン引数の配列取得
@@ -87,25 +91,27 @@ namespace ClipKick
             }
 
             // 指定プログラムをスタートする
-            var p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = strProgram;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.UseShellExecute = false;
+            var procKick = new System.Diagnostics.Process();
+            procKick.StartInfo.FileName = strProgram;
+            procKick.StartInfo.CreateNoWindow = true;
+            procKick.StartInfo.UseShellExecute = false;
             if (bForceDir) {
-                p.StartInfo.Arguments = string.Format("\"{0}\"", directory);
+                procKick.StartInfo.Arguments = string.Format("\"{0}\"", directory);
             }
             else {
-                p.StartInfo.Arguments = string.Format("\"{0}\"", arguments.ToString());
+                procKick.StartInfo.Arguments = string.Format("\"{0}\"", arguments.ToString());
             }
-            p.Start();
+            procKick.Start();
         }
 
-        // static void GetClipboardText()
-        // {
-        //     if (Clipboard.ContainsText()) {
-        //         target = Clipboard.GetText();
-        //     }
-        // }
+#if WINDOWS
+         static void GetClipboardText()
+         {
+             if (Clipboard.ContainsText()) {
+                 target = Clipboard.GetText();
+             }
+         }
+#endif
 
         static bool CheckFile(string path)
         {
