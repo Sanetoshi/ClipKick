@@ -1,5 +1,0 @@
-D:\Work\GitHub\ClipKick\ClipKick\bin\Debug\ClipKick.exe.config
-D:\Work\GitHub\ClipKick\ClipKick\bin\Debug\ClipKick.exe
-D:\Work\GitHub\ClipKick\ClipKick\bin\Debug\ClipKick.pdb
-D:\Work\GitHub\ClipKick\ClipKick\obj\Debug\ClipKick.exe
-D:\Work\GitHub\ClipKick\ClipKick\obj\Debug\ClipKick.pdb

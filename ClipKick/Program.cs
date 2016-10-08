@@ -10,14 +10,15 @@ namespace ClipKick
     class ClipKick
     {
         static string target = string.Empty;
-        static bool bIsOSX = false;
+        static bool bIsMaxOS = false;
 
         static void Main(string[] args)
         {
-            var xpc_service_name = System.Environment.GetEnvironmentVariable("XPC_SERVICE_NAME");
-            if (string.IsNullOrEmpty(xpc_service_name) == false) {
-                if (xpc_service_name.Contains("apple") == true) {
-                    bIsOSX = true;
+            // var envs = System.Environment.GetEnvironmentVariables();
+            var check_environemnt_variable = System.Environment.GetEnvironmentVariable("Apple_PubSub_Socket_Render");
+            if (string.IsNullOrEmpty(check_environemnt_variable) == false) {
+                if (check_environemnt_variable.Contains("apple") == true) {
+                    bIsMaxOS = true;
                 }
             }
 
@@ -28,7 +29,7 @@ namespace ClipKick
              t.Start();
              t.Join();
 #endif
-            if (bIsOSX) {
+            if (bIsMaxOS) {
                 var procClip = new System.Diagnostics.Process();
                 procClip.StartInfo.FileName = "pbpaste";
                 procClip.StartInfo.CreateNoWindow = true;
@@ -55,7 +56,7 @@ namespace ClipKick
                     return;
                 }
             } else {
-                if (bIsOSX == false) {
+                if (bIsMaxOS == false) {
                     return;
                 }
             }
